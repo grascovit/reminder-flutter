@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "227962091097",
+    "firebase_url": "https://lembrete-292923.firebaseio.com",
+    "project_id": "lembrete-292923",
+    "storage_bucket": "lembrete-292923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227962091097:android:a235e2e6d8eb7a4882e348",
+        "android_client_info": {
+          "package_name": "com.gabrielrascovit.lembrete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227962091097-vopgpbnkgbnql8h42a0j9euamhsips26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEs559eT9aZ37jo_59a6rx6yG64AFvv88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227962091097-vopgpbnkgbnql8h42a0j9euamhsips26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
