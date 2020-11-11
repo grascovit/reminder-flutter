@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lembrete/screens/home.dart';
-import 'package:lembrete/screens/reminder_form.dart';
+import 'package:lembrete/route_generator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +20,6 @@ class App extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: HomePage.routeName,
-        routes: {
-          HomePage.routeName: (context) => HomePage(),
-          ReminderForm.routeName: (context) => ReminderForm()
-        });
+        onGenerateRoute: RouteGenerator.generateRoute);
   }
 }

@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:lembrete/models/reminder.dart';
+import 'package:lembrete/repositories/reminder_repository.dart';
+import 'package:lembrete/screens/reminder_form.dart';
 
 class ReminderListTile extends StatelessWidget {
   final Reminder _reminder;
 
   ReminderListTile(this._reminder);
+
+  void _openEditReminderForm(BuildContext context) {
+    Navigator.pushNamed(context, ReminderForm.routeName,
+        arguments: {'title': 'Edit Reminder', 'reminder': _reminder});
+  }
+
+  Future<void> _deleteReminder(BuildContext context) async {
+    await ReminderRepository.delete(_reminder.id);
+    Scaffold.of(context)
+        .showSnackBar(SnackBar(content: Text('Reminder successfully deleted')));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +31,10 @@ class ReminderListTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(_reminder.placeType,
+            title: Text(
+                _reminder.place == null || _reminder.place.isEmpty
+                    ? _reminder.placeType
+                    : _reminder.place,
                 style: Theme.of(context).textTheme.headline6),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 6.0),
@@ -40,11 +56,11 @@ class ReminderListTile extends StatelessWidget {
             alignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () => _openEditReminderForm(context),
                 child: Text('Edit'.toUpperCase()),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () => _deleteReminder(context),
                 child: Text('Delete'.toUpperCase(),
                     style: TextStyle(color: Colors.red)),
               ),

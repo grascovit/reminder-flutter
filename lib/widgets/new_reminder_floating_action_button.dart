@@ -9,7 +9,7 @@ class NewReminderFloatingActionButton extends StatelessWidget {
 
     if (reminder != null) {
       Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text('Reminder successfully created!')));
+          SnackBar(content: Text('Reminder successfully created')));
     }
   }
 
