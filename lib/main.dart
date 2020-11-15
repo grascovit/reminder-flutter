@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lembrete/screens/home.dart';
+import 'package:lembrete/screens/login.dart';
 import 'package:lembrete/screens/reminder_form.dart';
 
 void main() {
@@ -16,8 +17,9 @@ class App extends StatelessWidget {
           accentColor: Colors.amberAccent,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: HomePage.routeName,
+        initialRoute: LoginPage.routeName,
         routes: {
+          LoginPage.routeName: (context) => LoginPage(),
           HomePage.routeName: (context) => HomePage(),
           ReminderForm.routeName: (context) => ReminderForm()
         });

@@ -4,7 +4,7 @@ import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/widgets/new_reminder_floating_action_button.dart';
 
 class HomePage extends StatefulWidget {
-  static String routeName = '/';
+  static String routeName = '/home';
 
   @override
   _HomePageState createState() => _HomePageState();
