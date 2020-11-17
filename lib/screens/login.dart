@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade600,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(title: Text('Login')),
       body: FutureBuilder<GoogleSignInAccount>(
           future: _signInSilently(),

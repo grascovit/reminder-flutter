@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lembrete/services/auth_service.dart';
 import 'package:lembrete/screens/home.dart';
 
 class GoogleSignInButton extends StatelessWidget {
@@ -10,13 +11,14 @@ class GoogleSignInButton extends StatelessWidget {
       final GoogleSignInAuthentication authentication =
           await account?.authentication;
 
-      // TODO: call API to save data
-
       if (authentication != null) {
+        await AuthService.googleSignIn(authentication.idToken);
         Navigator.pushReplacementNamed(context, HomePage.routeName);
       }
     } catch (exception) {
-      print(exception);
+      Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('There was a problem while trying to sign in '
+              'using Google. Please try again.')));
     }
   }
 

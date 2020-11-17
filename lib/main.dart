@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lembrete/screens/home.dart';
 import 'package:lembrete/screens/login.dart';
 import 'package:lembrete/screens/reminder_form.dart';
+import 'package:lembrete/constants.dart';
 
-void main() {
+Future main() async {
+  await DotEnv().load('.env');
   runApp(App());
 }
 
@@ -13,7 +16,7 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: 'Reminder',
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          primarySwatch: primarySwatch,
           accentColor: Colors.amberAccent,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
