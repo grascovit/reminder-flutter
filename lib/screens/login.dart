@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lembrete/screens/home.dart';
+import 'package:lembrete/services/auth_service.dart';
 import 'package:lembrete/widgets/google_sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
     final GoogleSignInAccount account = await _googleSignIn.signInSilently();
 
     if (account != null) {
+      final GoogleSignInAuthentication authentication =
+          await account.authentication;
+      await AuthService.googleSignIn(authentication.idToken);
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     }
 

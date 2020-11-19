@@ -15,14 +15,20 @@ class ApiClient {
   }
 
   static get authenticatedClient {
+    final storage = new FlutterSecureStorage();
+
     _dio ??= client;
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-      final storage = new FlutterSecureStorage();
       final String token = await storage.read(key: 'token');
       options.headers['Authorization'] = 'Bearer $token';
 
       return options;
+    }, onResponse: (Response response) async {
+      final String accessToken = response.headers.value('Access-Token');
+      await storage.write(key: 'token', value: accessToken);
+
+      return response;
     }));
 
     return _dio;
