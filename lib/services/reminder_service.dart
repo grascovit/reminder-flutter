@@ -19,6 +19,13 @@ class ReminderService {
     return Reminder.fromMap(response.data);
   }
 
+  static Future<Reminder> update(Reminder reminder) async {
+    final Response response = await ApiClient.authenticatedClient
+        .patch('reminders/${reminder.id}', data: reminder.toJson());
+
+    return Reminder.fromMap(response.data);
+  }
+
   static Future<void> delete(int id) async {
     await ApiClient.authenticatedClient.delete('reminders/$id');
   }

@@ -4,7 +4,7 @@ import 'package:lembrete/screens/home.dart';
 import 'package:lembrete/widgets/google_sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
-  static String routeName = '/login';
+  static const String routeName = 'login';
 
   @override
   _LoginPageState createState() => _LoginPageState();

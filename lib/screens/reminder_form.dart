@@ -4,31 +4,61 @@ import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/providers/reminder_provider.dart';
 
 class ReminderForm extends StatefulWidget {
-  static String routeName = '/reminder_form';
+  final String title;
+  final Reminder reminder;
+  static const String routeName = 'reminder_form';
+
+  ReminderForm({this.title, this.reminder});
 
   @override
   _ReminderFormState createState() => _ReminderFormState();
 }
 
 class _ReminderFormState extends State<ReminderForm> {
+  int _id;
   double _radius = 100;
   String _reminderType;
   String _placeType;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _placeController = TextEditingController();
-  static const String PLACE_REMINDER = 'PLACE_REMINDER';
-  static const String PLACE_TYPE_REMINDER = 'PLACE_TYPE_REMINDER';
+  static const String placeReminder = 'PLACE_REMINDER';
+  static const String placeTypeReminder = 'PLACE_TYPE_REMINDER';
 
   void _saveReminder(BuildContext context) {
     if (_formKey.currentState.validate()) {
       final reminder = Reminder(
+          id: _id,
           description: _descriptionController.text,
           place: _placeController.text,
           placeType: _placeType,
           radius: _radius);
-      context.read<ReminderProvider>().create(reminder);
+
+      if (_id == null) {
+        context.read<ReminderProvider>().create(reminder);
+      } else {
+        context.read<ReminderProvider>().update(reminder);
+      }
+
       Navigator.pop(context, reminder);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    final reminder = widget.reminder;
+
+    if (reminder != null) {
+      _id = reminder.id;
+      _descriptionController.text = reminder.description ?? '';
+      _placeController.text = reminder.place ?? '';
+      _radius = reminder.radius;
+      _placeType = reminder.placeType;
+      _reminderType = reminder.place == null || reminder.place.isEmpty
+          ? placeTypeReminder
+          : placeReminder;
     }
   }
 
@@ -41,10 +71,8 @@ class _ReminderFormState extends State<ReminderForm> {
 
   @override
   Widget build(BuildContext context) {
-    final Map arguments = ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(title: Text(arguments['title'])),
+        appBar: AppBar(title: Text(widget.title)),
         body: Builder(
           builder: (context) {
             return ListView(
@@ -92,7 +120,7 @@ class _ReminderFormState extends State<ReminderForm> {
                           ),
                           RadioListTile(
                             title: const Text('Near a specific place'),
-                            value: PLACE_REMINDER,
+                            value: placeReminder,
                             groupValue: _reminderType,
                             onChanged: (value) {
                               setState(() {
@@ -104,7 +132,7 @@ class _ReminderFormState extends State<ReminderForm> {
                           RadioListTile(
                             title: const Text(
                                 'Near places with a specific category'),
-                            value: PLACE_TYPE_REMINDER,
+                            value: placeTypeReminder,
                             groupValue: _reminderType,
                             onChanged: (value) {
                               setState(() {
@@ -114,7 +142,7 @@ class _ReminderFormState extends State<ReminderForm> {
                             },
                           ),
                           Visibility(
-                              visible: _reminderType == PLACE_TYPE_REMINDER,
+                              visible: _reminderType == placeTypeReminder,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -130,6 +158,7 @@ class _ReminderFormState extends State<ReminderForm> {
                                       padding: const EdgeInsets.fromLTRB(
                                           16.0, 8.0, 16.0, 8.0),
                                       child: DropdownButtonFormField(
+                                        value: _placeType,
                                         validator: (value) {
                                           if (value == null) {
                                             return 'Please enter a place type';
@@ -158,7 +187,7 @@ class _ReminderFormState extends State<ReminderForm> {
                                 ],
                               )),
                           Visibility(
-                              visible: _reminderType == PLACE_REMINDER,
+                              visible: _reminderType == placeReminder,
                               child: Column(
                                 children: [
                                   Padding(

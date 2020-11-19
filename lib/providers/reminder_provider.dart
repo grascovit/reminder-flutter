@@ -9,27 +9,38 @@ class ReminderProvider extends ChangeNotifier {
 
   Future<List<Reminder>> fetchReminders() async {
     _reminders = await ReminderService.list();
-    notifyListeners();
 
     return _reminders;
   }
 
   Future<void> create(Reminder reminder) async {
-    Reminder _reminder = await ReminderService.create(reminder);
-    add(_reminder);
+    Reminder persistedReminder = await ReminderService.create(reminder);
+    _add(persistedReminder);
+  }
+
+  Future<void> update(Reminder oldReminder) async {
+    Reminder newReminder = await ReminderService.update(oldReminder);
+    _replace(oldReminder, newReminder);
   }
 
   Future<void> delete(Reminder reminder) async {
     await ReminderService.delete(reminder.id);
-    remove(reminder);
+    _remove(reminder);
   }
 
-  void add(Reminder reminder) {
+  void _add(Reminder reminder) {
     _reminders.add(reminder);
     notifyListeners();
   }
 
-  void remove(Reminder reminder) {
+  void _replace(Reminder oldReminder, Reminder newReminder) {
+    int index = _reminders
+        .indexWhere((Reminder reminder) => reminder.id == oldReminder.id);
+    _reminders[index] = newReminder;
+    notifyListeners();
+  }
+
+  void _remove(Reminder reminder) {
     _reminders.remove(reminder);
     notifyListeners();
   }

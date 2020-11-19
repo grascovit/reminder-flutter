@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/providers/reminder_provider.dart';
+import 'package:lembrete/screens/reminder_form.dart';
 
 class ReminderListTile extends StatelessWidget {
   final Reminder _reminder;
 
   ReminderListTile(this._reminder);
+
+  void _openEditReminderForm(BuildContext context) {
+    Navigator.pushNamed(context, ReminderForm.routeName,
+        arguments: {'title': 'Edit Reminder', 'reminder': _reminder});
+  }
 
   Future<void> _deleteReminder(BuildContext context) async {
     context.read<ReminderProvider>().delete(_reminder);
@@ -26,7 +32,10 @@ class ReminderListTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(_reminder.placeType ?? _reminder.place,
+            title: Text(
+                _reminder.place == null || _reminder.place.isEmpty
+                    ? _reminder.placeType
+                    : _reminder.place,
                 style: Theme.of(context).textTheme.headline6),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 6.0),
@@ -48,7 +57,7 @@ class ReminderListTile extends StatelessWidget {
             alignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () => _openEditReminderForm(context),
                 child: Text('Edit'.toUpperCase()),
               ),
               TextButton(
