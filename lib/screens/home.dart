@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lembrete/services/reminder_service.dart';
-import 'package:lembrete/widgets/reminder_list.dart';
+import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
+import 'package:lembrete/providers/reminder_provider.dart';
 import 'package:lembrete/widgets/new_reminder_floating_action_button.dart';
+import 'package:lembrete/widgets/reminder_list.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/home';
@@ -12,20 +13,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<List<Reminder>> _fetchReminders() async {
-    return await ReminderService.list();
+  Future<List<Reminder>> _reminders;
+
+  @override
+  void initState() {
+    super.initState();
+    _reminders = context.read<ReminderProvider>().fetchReminders();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Reminders')),
-      body: FutureBuilder<List<Reminder>>(
-          future: _fetchReminders(),
+      body: FutureBuilder(
+          future: _reminders,
           builder:
               (BuildContext builder, AsyncSnapshot<List<Reminder>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return ReminderList(snapshot.data ?? []);
+              return ReminderList();
             } else {
               return Center(child: CircularProgressIndicator());
             }

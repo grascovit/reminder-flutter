@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
+import 'package:lembrete/providers/reminder_provider.dart';
 
 class ReminderForm extends StatefulWidget {
   static String routeName = '/reminder_form';
@@ -18,13 +20,14 @@ class _ReminderFormState extends State<ReminderForm> {
   static const String PLACE_REMINDER = 'PLACE_REMINDER';
   static const String PLACE_TYPE_REMINDER = 'PLACE_TYPE_REMINDER';
 
-  void _saveReminder(context) {
+  void _saveReminder(BuildContext context) {
     if (_formKey.currentState.validate()) {
       final reminder = Reminder(
           description: _descriptionController.text,
           place: _placeController.text,
           placeType: _placeType,
           radius: _radius);
+      context.read<ReminderProvider>().create(reminder);
       Navigator.pop(context, reminder);
     }
   }

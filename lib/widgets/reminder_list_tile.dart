@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
+import 'package:lembrete/providers/reminder_provider.dart';
 
 class ReminderListTile extends StatelessWidget {
   final Reminder _reminder;
 
   ReminderListTile(this._reminder);
+
+  Future<void> _deleteReminder(BuildContext context) async {
+    context.read<ReminderProvider>().delete(_reminder);
+    Scaffold.of(context)
+        .showSnackBar(SnackBar(content: Text('Reminder successfully deleted')));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +26,7 @@ class ReminderListTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(_reminder.placeType,
+            title: Text(_reminder.placeType ?? _reminder.place,
                 style: Theme.of(context).textTheme.headline6),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 6.0),
@@ -44,7 +52,7 @@ class ReminderListTile extends StatelessWidget {
                 child: Text('Edit'.toUpperCase()),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () => _deleteReminder(context),
                 child: Text('Delete'.toUpperCase(),
                     style: TextStyle(color: Colors.red)),
               ),

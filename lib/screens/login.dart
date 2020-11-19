@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future<GoogleSignInAccount> _googleSignInAccount;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<GoogleSignInAccount> _signInSilently() async {
@@ -33,12 +34,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _googleSignInAccount = _signInSilently();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(title: Text('Login')),
       body: FutureBuilder<GoogleSignInAccount>(
-          future: _signInSilently(),
+          future: _googleSignInAccount,
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount> snapshot) {
             return Column(children: [

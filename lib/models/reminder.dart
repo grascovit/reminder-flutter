@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Reminder {
-  int id;
-  String description;
-  double radius;
-  String placeType;
-  String place;
-  double latitude;
-  double longitude;
-  int lastNotifiedAt;
+  final int id;
+  final String description;
+  final double radius;
+  final String placeType;
+  final String place;
+  final double latitude;
+  final double longitude;
+  final int lastNotifiedAt;
 
   Reminder(
       {this.id,
@@ -31,4 +31,15 @@ class Reminder {
         longitude: data['longitude'],
         lastNotifiedAt: data['last_notified_at']);
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'description': description,
+        'radius': radius,
+        'place_type': placeType,
+        'place': place,
+        'latitude': latitude,
+        'longitude': longitude,
+        'last_notified_at': lastNotifiedAt
+      };
 }

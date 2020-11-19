@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:lembrete/models/reminder.dart';
+import 'package:provider/provider.dart';
+import 'package:lembrete/providers/reminder_provider.dart';
 import 'package:lembrete/widgets/reminder_list_tile.dart';
 
 class ReminderList extends StatelessWidget {
-  List<Reminder> _reminders;
-
-  ReminderList(this._reminders);
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _reminders.length,
-        itemBuilder: (context, index) {
-          return ReminderListTile(_reminders[index]);
-        });
+    return Consumer<ReminderProvider>(
+      builder: (builder, model, child) {
+        return ListView.builder(
+            itemCount: model.reminders.length,
+            itemBuilder: (context, index) {
+              return ReminderListTile(model.reminders[index]);
+            });
+      },
+    );
   }
 }
