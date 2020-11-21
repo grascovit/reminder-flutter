@@ -14,14 +14,15 @@ class ReminderService {
 
   static Future<Reminder> create(Reminder reminder) async {
     final Response response = await ApiClient.authenticatedClient
-        .post('reminders', data: reminder.toJson());
+        .post('reminders', data: {'reminder': reminder.toJson()});
 
     return Reminder.fromMap(response.data);
   }
 
   static Future<Reminder> update(Reminder reminder) async {
-    final Response response = await ApiClient.authenticatedClient
-        .patch('reminders/${reminder.id}', data: reminder.toJson());
+    final Response response = await ApiClient.authenticatedClient.patch(
+        'reminders/${reminder.id}',
+        data: {'reminder': reminder.toJson()});
 
     return Reminder.fromMap(response.data);
   }
