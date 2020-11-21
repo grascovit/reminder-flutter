@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lembrete/screens/home.dart';
 import 'package:lembrete/services/auth_service.dart';
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).login)),
       body: FutureBuilder<GoogleSignInAccount>(
           future: _googleSignInAccount,
           builder: (BuildContext context,

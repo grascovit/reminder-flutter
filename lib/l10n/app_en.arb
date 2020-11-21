@@ -1,0 +1,113 @@
+{
+  "@@locale": "en",
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description hint"
+  },
+  "descriptionHelper": "An action you should remind of: buy milk, feed your pet, etc.",
+  "@descriptionHelper": {
+    "description": "Description helper"
+  },
+  "descriptionLabel": "Remind me to:",
+  "@descriptionLabel": {
+    "description": "Description label"
+  },
+  "descriptionMissing": "Please enter a description",
+  "@descriptionMissing": {
+    "description": "Description missing"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "editReminder": "Edit Reminder",
+  "@editReminder": {
+    "description": "AppBar title for Edit Reminder form"
+  },
+  "googleSignInError": "There was a problem while trying to sign in using Google. Please try again.",
+  "@googleSignInError": {
+    "description": "Google Sign In error"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "AppBar title for Login page"
+  },
+  "newReminder": "New Reminder",
+  "@newReminder": {
+    "description": "AppBar title for New Reminder form"
+  },
+  "placeHint": "Place",
+  "@placeHint": {
+    "description": "Place hint"
+  },
+  "placeLabel": "Near a specific place",
+  "@placeLabel": {
+    "description": "Place label"
+  },
+  "placeMissing": "Please enter a place",
+  "@placeMissing": {
+    "description": "Place missing"
+  },
+  "placeTypeDropdownLabel": "And I am near a place of the following type:",
+  "@placeTypeDropdownLabel": {
+    "description": "Place type dropdown label"
+  },
+  "placeTypeHint": "Place Type",
+  "@placeTypeHint": {
+    "description": "Place type hint"
+  },
+  "placeTypeLabel": "Near places with a specific category",
+  "@placeTypeLabel": {
+    "description": "Place type label"
+  },
+  "placeTypeMissing": "Please enter a place type",
+  "@placeTypeMissing": {
+    "description": "Place type missing"
+  },
+  "radiusLabel": "And I am at most {radius} meters away from it",
+  "@radiusLabel": {
+    "description": "Place missing",
+    "placeholders": {
+      "radius": {}
+    }
+  },
+  "reminderCreated": "Reminder successfully created",
+  "@reminderCreated": {
+    "description": "Reminder created"
+  },
+  "reminderDeleted": "Reminder successfully deleted",
+  "@reminderDeleted": {
+    "description": "Reminder deleted"
+  },
+  "reminders": "Reminders",
+  "@reminders": {
+    "description": "AppBar title for Home page"
+  },
+  "reminderTypeLabel": "When I am:",
+  "@reminderTypeLabel": {
+    "description": "Reminder type label"
+  },
+  "reminderUpdated": "Reminder successfully updated",
+  "@reminderUpdated": {
+    "description": "Reminder updated"
+  },
+  "signInWithGoogle": "Sign in with Google",
+  "@signInWithGoogle": {
+    "description": "Sign in with Google button"
+  },
+  "submit": "Submit",
+  "@submit": {
+    "description": "Submit button"
+  },
+  "upToRadius": "Up to {radius}m away",
+  "@upToRadius": {
+    "description": "Radius label",
+    "placeholders": {
+      "radius": {}
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/providers/reminder_provider.dart';
@@ -6,7 +7,7 @@ import 'package:lembrete/providers/reminder_provider.dart';
 class ReminderForm extends StatefulWidget {
   final String title;
   final Reminder reminder;
-  static const String routeName = 'reminder_form';
+  static const String routeName = 'reminderForm';
 
   ReminderForm({this.title, this.reminder});
 
@@ -22,11 +23,12 @@ class _ReminderFormState extends State<ReminderForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _placeController = TextEditingController();
-  static const String placeReminder = 'PLACE_REMINDER';
-  static const String placeTypeReminder = 'PLACE_TYPE_REMINDER';
+  static const String placeReminder = 'placeReminder';
+  static const String placeTypeReminder = 'placeTypeReminder';
 
   void _saveReminder(BuildContext context) {
     if (_formKey.currentState.validate()) {
+      String message;
       final reminder = Reminder(
           id: _id,
           description: _descriptionController.text,
@@ -36,11 +38,13 @@ class _ReminderFormState extends State<ReminderForm> {
 
       if (_id == null) {
         context.read<ReminderProvider>().create(reminder);
+        message = AppLocalizations.of(context).reminderCreated;
       } else {
         context.read<ReminderProvider>().update(reminder);
+        message = AppLocalizations.of(context).reminderUpdated;
       }
 
-      Navigator.pop(context, reminder);
+      Navigator.pop(context, message);
     }
   }
 
@@ -86,7 +90,7 @@ class _ReminderFormState extends State<ReminderForm> {
                             padding:
                                 const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
                             child: Text(
-                              'Remind me to:',
+                              AppLocalizations.of(context).descriptionLabel,
                               style: TextStyle(fontSize: 16.0),
                             ),
                           ),
@@ -97,14 +101,16 @@ class _ReminderFormState extends State<ReminderForm> {
                                 minLines: 1,
                                 maxLines: 5,
                                 decoration: InputDecoration(
-                                    hintText: 'Description',
+                                    hintText: AppLocalizations.of(context)
+                                        .description,
                                     border: OutlineInputBorder(),
-                                    helperText:
-                                        'An action you should remind of: buy milk, feed your pet, etc.'),
+                                    helperText: AppLocalizations.of(context)
+                                        .descriptionHelper),
                                 controller: _descriptionController,
                                 validator: (value) {
                                   if (value.trim().isEmpty) {
-                                    return 'Please enter a description';
+                                    return AppLocalizations.of(context)
+                                        .descriptionMissing;
                                   }
 
                                   return null;
@@ -114,12 +120,13 @@ class _ReminderFormState extends State<ReminderForm> {
                             padding:
                                 const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
                             child: Text(
-                              'When I am:',
+                              AppLocalizations.of(context).reminderTypeLabel,
                               style: TextStyle(fontSize: 16.0),
                             ),
                           ),
                           RadioListTile(
-                            title: const Text('Near a specific place'),
+                            title:
+                                Text(AppLocalizations.of(context).placeLabel),
                             value: placeReminder,
                             groupValue: _reminderType,
                             onChanged: (value) {
@@ -130,8 +137,8 @@ class _ReminderFormState extends State<ReminderForm> {
                             },
                           ),
                           RadioListTile(
-                            title: const Text(
-                                'Near places with a specific category'),
+                            title: Text(
+                                AppLocalizations.of(context).placeTypeLabel),
                             value: placeTypeReminder,
                             groupValue: _reminderType,
                             onChanged: (value) {
@@ -150,7 +157,8 @@ class _ReminderFormState extends State<ReminderForm> {
                                     padding: const EdgeInsets.fromLTRB(
                                         16.0, 16.0, 16.0, 8.0),
                                     child: Text(
-                                      'And I am near a place of the following type:',
+                                      AppLocalizations.of(context)
+                                          .placeTypeDropdownLabel,
                                       style: TextStyle(fontSize: 16.0),
                                     ),
                                   ),
@@ -161,14 +169,16 @@ class _ReminderFormState extends State<ReminderForm> {
                                         value: _placeType,
                                         validator: (value) {
                                           if (value == null) {
-                                            return 'Please enter a place type';
+                                            return AppLocalizations.of(context)
+                                                .placeTypeMissing;
                                           }
 
                                           return null;
                                         },
                                         decoration: InputDecoration(
                                             border: OutlineInputBorder()),
-                                        hint: Text('Place Type'),
+                                        hint: Text(AppLocalizations.of(context)
+                                            .placeTypeHint),
                                         items: [
                                           DropdownMenuItem(
                                               child: Text('Bakery'),
@@ -196,11 +206,14 @@ class _ReminderFormState extends State<ReminderForm> {
                                     child: TextFormField(
                                         decoration: InputDecoration(
                                             border: OutlineInputBorder(),
-                                            hintText: 'Place'),
+                                            hintText:
+                                                AppLocalizations.of(context)
+                                                    .placeHint),
                                         controller: _placeController,
                                         validator: (value) {
                                           if (value.trim().isEmpty) {
-                                            return 'Please enter a place';
+                                            return AppLocalizations.of(context)
+                                                .placeMissing;
                                           }
 
                                           return null;
@@ -212,7 +225,8 @@ class _ReminderFormState extends State<ReminderForm> {
                             padding:
                                 const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
                             child: Text(
-                              'And I am at most ${_radius.toInt()} meters away from it',
+                              AppLocalizations.of(context)
+                                  .radiusLabel(_radius.toInt()),
                               style: TextStyle(fontSize: 16.0),
                             ),
                           ),
@@ -238,7 +252,9 @@ class _ReminderFormState extends State<ReminderForm> {
                             child: Center(
                                 child: ElevatedButton(
                                     onPressed: () => _saveReminder(context),
-                                    child: Text('Submit'.toUpperCase()))),
+                                    child: Text(AppLocalizations.of(context)
+                                        .submit
+                                        .toUpperCase()))),
                           )
                         ]))
               ],

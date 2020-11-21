@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lembrete/services/auth_service.dart';
 import 'package:lembrete/screens/home.dart';
@@ -17,8 +18,7 @@ class GoogleSignInButton extends StatelessWidget {
       }
     } catch (exception) {
       Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('There was a problem while trying to sign in '
-              'using Google. Please try again.')));
+          content: Text(AppLocalizations.of(context).googleSignInError)));
     }
   }
 
@@ -36,7 +36,7 @@ class GoogleSignInButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Text(
-                'Sign in with Google',
+                AppLocalizations.of(context).signInWithGoogle,
                 style: TextStyle(fontSize: 16.0, color: Colors.grey.shade900),
               ),
             )

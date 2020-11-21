@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/providers/reminder_provider.dart';
@@ -9,15 +10,22 @@ class ReminderListTile extends StatelessWidget {
 
   ReminderListTile(this._reminder);
 
-  void _openEditReminderForm(BuildContext context) {
-    Navigator.pushNamed(context, ReminderForm.routeName,
-        arguments: {'title': 'Edit Reminder', 'reminder': _reminder});
+  void _openEditReminderForm(BuildContext context) async {
+    var message = await Navigator.pushNamed(context, ReminderForm.routeName,
+        arguments: {
+          'title': AppLocalizations.of(context).editReminder,
+          'reminder': _reminder
+        });
+
+    if (message != null) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
+    }
   }
 
   Future<void> _deleteReminder(BuildContext context) async {
     context.read<ReminderProvider>().delete(_reminder);
-    Scaffold.of(context)
-        .showSnackBar(SnackBar(content: Text('Reminder successfully deleted')));
+    Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).reminderDeleted)));
   }
 
   @override
@@ -40,7 +48,8 @@ class ReminderListTile extends StatelessWidget {
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 6.0),
               child: Text(
-                'Up to ${_reminder.radius.toInt()}m away',
+                AppLocalizations.of(context)
+                    .upToRadius(_reminder.radius.toInt()),
                 style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
             ),
@@ -58,11 +67,11 @@ class ReminderListTile extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () => _openEditReminderForm(context),
-                child: Text('Edit'.toUpperCase()),
+                child: Text(AppLocalizations.of(context).edit.toUpperCase()),
               ),
               TextButton(
                 onPressed: () => _deleteReminder(context),
-                child: Text('Delete'.toUpperCase(),
+                child: Text(AppLocalizations.of(context).delete.toUpperCase(),
                     style: TextStyle(color: Colors.red)),
               ),
             ],

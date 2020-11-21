@@ -1,0 +1,113 @@
+{
+  "@@locale": "pt",
+  "delete": "Apagar",
+  "@delete": {
+    "description": "Delete button"
+  },
+  "description": "Descrição",
+  "@description": {
+    "description": "Description hint"
+  },
+  "descriptionHelper": "Uma ação que você deve lembrar: comprar leite, alimentar seu pet, etc.",
+  "@descriptionHelper": {
+    "description": "Description helper"
+  },
+  "descriptionLabel": "Me lembre de:",
+  "@descriptionLabel": {
+    "description": "Description label"
+  },
+  "descriptionMissing": "Por favor, informe uma descrição",
+  "@descriptionMissing": {
+    "description": "Description missing"
+  },
+  "edit": "Editar",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "editReminder": "Editar lembrete",
+  "@editReminder": {
+    "description": "AppBar title for Edit Reminder form"
+  },
+  "googleSignInError": "Ocorreu um problema ao tentar entrar usando sua conta Google. Por favor, tente novamente.",
+  "@googleSignInError": {
+    "description": "Google Sign In error"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "AppBar title for Login page"
+  },
+  "newReminder": "Novo lembrete",
+  "@newReminder": {
+    "description": "AppBar title for New Reminder form"
+  },
+  "placeHint": "Lugar",
+  "@placeHint": {
+    "description": "Place hint"
+  },
+  "placeLabel": "Próximo de um lugar específico",
+  "@placeLabel": {
+    "description": "Place label"
+  },
+  "placeMissing": "Por favor, informe um lugar",
+  "@placeMissing": {
+    "description": "Place missing"
+  },
+  "placeTypeDropdownLabel": "E estou próximo de um lugar da seguinte categoria:",
+  "@placeTypeDropdownLabel": {
+    "description": "Place type dropdown label"
+  },
+  "placeTypeHint": "Categoria do lugar",
+  "@placeTypeHint": {
+    "description": "Place type hint"
+  },
+  "placeTypeLabel": "Próximo de lugares de uma categoria específica",
+  "@placeTypeLabel": {
+    "description": "Place type label"
+  },
+  "placeTypeMissing": "Por favor, informe uma categoria",
+  "@placeTypeMissing": {
+    "description": "Place type missing"
+  },
+  "radiusLabel": "E estou até {radius} metros de distância",
+  "@radiusLabel": {
+    "description": "Place missing",
+    "placeholders": {
+      "radius": {}
+    }
+  },
+  "reminderCreated": "Lembrete criado com sucesso",
+  "@reminderCreated": {
+    "description": "Reminder created"
+  },
+  "reminderDeleted": "Lembrete apagado com sucesso",
+  "@reminderDeleted": {
+    "description": "Reminder deleted"
+  },
+  "reminders": "Lembretes",
+  "@reminders": {
+    "description": "AppBar title for Home page"
+  },
+  "reminderTypeLabel": "Quando eu estiver:",
+  "@reminderTypeLabel": {
+    "description": "Reminder type label"
+  },
+  "reminderUpdated": "Lembrete atualizado com sucesso",
+  "@reminderUpdated": {
+    "description": "Reminder updated"
+  },
+  "signInWithGoogle": "Entrar com sua conta Google",
+  "@signInWithGoogle": {
+    "description": "Sign in with Google button"
+  },
+  "submit": "Salvar",
+  "@submit": {
+    "description": "Submit button"
+  },
+  "upToRadius": "Até {radius}m de distância",
+  "@upToRadius": {
+    "description": "Radius label",
+    "placeholders": {
+      "radius": {}
+    }
+  }
+}

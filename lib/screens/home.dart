@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:lembrete/models/reminder.dart';
 import 'package:lembrete/providers/reminder_provider.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Reminders')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).reminders)),
       body: FutureBuilder(
           future: _reminders,
           builder:

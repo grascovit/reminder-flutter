@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lembrete/screens/reminder_form.dart';
 
 class NewReminderFloatingActionButton extends StatelessWidget {
   void _openNewReminderForm(BuildContext context) async {
-    dynamic reminder = await Navigator.pushNamed(
-        context, ReminderForm.routeName,
-        arguments: {'title': 'New Reminder'});
+    var message = await Navigator.pushNamed(context, ReminderForm.routeName,
+        arguments: {'title': AppLocalizations.of(context).newReminder});
 
-    if (reminder != null) {
-      Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text('Reminder successfully created!')));
+    if (message != null) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
